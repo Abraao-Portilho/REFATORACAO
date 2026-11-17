@@ -58,9 +58,14 @@ class PurchaseEmailService:
         parts.append(f"Descontos: R$ {discount:.2f}\n")
         parts.append(f"TOTAL: R$ {total:.2f}\n\n")
 
-        parts.append("Endereço de entrega:\n")
-        parts.append(f"{purchase.address.street}, {purchase.address.number}\n")
-        parts.append(f"{purchase.address.city} - {purchase.address.zip_code}\n\n")
+        parts.append(self._build_delivery_address(purchase.address))
 
         parts.append("Obrigado por comprar com a gente!\n")
         return "".join(parts)
+
+    def _build_delivery_address(self, address: Address) -> str:
+        return (
+           "Endereço de entrega:\n"
+          f"{address.street}, {address.number}\n"
+          f"{address.city} - {address.zip_code}\n\n"
+       )
