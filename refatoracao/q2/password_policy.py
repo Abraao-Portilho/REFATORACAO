@@ -5,14 +5,12 @@ class PasswordPolicy:
 
     def is_valid(self, password: str | None) -> bool:
         return (
-            self._has_min_length(password)
+            password is not None
+            and len(password) >= 10
             and self._has_upper(password)
             and self._has_digit(password)
             and " " not in password
         )
-
-    def _has_min_length(self, p: str | None) -> bool:
-        return p is not None and len(p) >= 10
 
     def _has_upper(self, p: str) -> bool:
         return any(c.isupper() for c in p)
