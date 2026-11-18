@@ -8,7 +8,7 @@ class PasswordPolicy:
             self._has_min_length(password)
             and self._has_upper(password)
             and self._has_digit(password)
-            and self._has_no_spaces(password)
+            and " " not in password
         )
 
     def _has_min_length(self, p: str | None) -> bool:
@@ -20,5 +20,3 @@ class PasswordPolicy:
     def _has_digit(self, p: str) -> bool:
         return any(c.isdigit() for c in p)
 
-    def _has_no_spaces(self, p: str) -> bool:
-        return " " not in p
